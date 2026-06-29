@@ -5,6 +5,7 @@ const connectDB = require('./data-source/mongo');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 const corsOrigin = require('./middleware/corsOrigin');
 const feedRoutes = require('./routes/feed');
 const authRoutes = require('./routes/auth');
@@ -12,6 +13,8 @@ const multer = require('multer');
 
 
 const app = express();
+
+app.use(helmet());
 
 // app.use(bodyParser.urlencoded()); // x-www-form-urlencoded <form>
 app.use(bodyParser.json()); // application/json
