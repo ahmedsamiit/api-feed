@@ -1,6 +1,6 @@
-const { body } = require('express-validator');
+import { body, type ValidationChain } from 'express-validator';
 
-exports.createPostValidation = [
+export const createPostValidation: ValidationChain[] = [
   body('title')
     .trim()
     .isLength({ min: 5 })
@@ -9,15 +9,9 @@ exports.createPostValidation = [
     .trim()
     .isLength({ min: 5 })
     .withMessage('Content must be at least 5 characters long.'),
-  body('image').custom((value, { req }) => {
-    if (req.file) {
-      return true;
-    }
-    throw new Error('Image is required.');
-  })
 ];
 
-exports.updatePostValidation = [
+export const updatePostValidation: ValidationChain[] = [
   body('title')
     .trim()
     .isLength({ min: 5 })

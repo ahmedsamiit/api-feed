@@ -1,6 +1,6 @@
-const { body } = require('express-validator');
+import { body, type ValidationChain } from 'express-validator';
 
-exports.signupValidation = [
+export const signupValidation: ValidationChain[] = [
   body('email')
     .normalizeEmail()
     .isEmail()
@@ -12,10 +12,10 @@ exports.signupValidation = [
   body('name')
     .trim()
     .isLength({ min: 3 })
-    .withMessage('Name must be at least 3 characters long.'),
+    .withMessage('Name must be at least 3 characters long.')
 ];
 
-exports.loginValidation = [
+export const loginValidation: ValidationChain[] = [
   body('email')
     .normalizeEmail()
     .isEmail()
@@ -23,5 +23,5 @@ exports.loginValidation = [
   body('password')
     .trim()
     .isLength({ min: 5 })
-    .withMessage('Password must be at least 5 characters long.'),
+    .withMessage('Password must be at least 5 characters long.')
 ];
