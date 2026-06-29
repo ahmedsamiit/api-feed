@@ -1,0 +1,29 @@
+const { body } = require('express-validator');
+
+exports.createPostValidation = [
+  body('title')
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Title must be at least 5 characters long.'),
+  body('content')
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Content must be at least 5 characters long.'),
+  body('image').custom((value, { req }) => {
+    if (req.file) {
+      return true;
+    }
+    throw new Error('Image is required.');
+  })
+];
+
+exports.updatePostValidation = [
+  body('title')
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Title must be at least 5 characters long.'),
+  body('content')
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage('Content must be at least 5 characters long.'),
+];
